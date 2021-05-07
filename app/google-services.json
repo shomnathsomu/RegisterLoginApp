@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "604898878265",
+    "project_id": "shomnathfirstapplication",
+    "storage_bucket": "shomnathfirstapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604898878265:android:78fe5a53a386dd537bfee8",
+        "android_client_info": {
+          "package_name": "com.example.shomnathfirstapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604898878265-pkg2o7bg9pecftf4lrpjpnt1jauc4fn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9iI9vggBGE2tEfI5Gq9G26kZy3KjFDqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604898878265-pkg2o7bg9pecftf4lrpjpnt1jauc4fn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
