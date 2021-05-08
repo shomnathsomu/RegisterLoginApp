@@ -18,68 +18,42 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignIn extends AppCompatActivity {
-    EditText mEmail, mPassword;
-    Button mLoginBtn, mRegisterBtn;
-    FirebaseAuth fAuth;
-    ProgressBar progressBar;
+    EditText mUsernameLogin, mPasswordLogin;
+    Button mLoginBtn;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        getSupportActionBar().setTitle("Login");
 
-        mEmail = findViewById(R.id.Email);
-        mPassword = findViewById(R.id.password);
-        fAuth = FirebaseAuth.getInstance();
-        progressBar = findViewById(R.id.progressBar);
-        mLoginBtn = findViewById(R.id.loginBtn);
-        mRegisterBtn = findViewById(R.id.registerBtn);
+        mUsernameLogin = (EditText) findViewById(R.id.usernameLogin);
+        mPasswordLogin = (EditText) findViewById(R.id.passwordLogin);
+
+        mLoginBtn = (Button) findViewById(R.id.btnLogin);
+
+        DB = new DBHelper(this);
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                String usernameLogin = mUsernameLogin.getText().toString();
+                String passwordLogin = mPasswordLogin.getText().toString();
 
-                if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email is Required.");
-                    return;
-                }
+                if (usernameLogin.equals("") || passwordLogin.equals("")) {
+                    Toast.makeText(SignIn.this, "Please enter the credentials.", Toast.LENGTH_SHORT).show();
+                } else {
 
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password id required.");
-                    return;
-                }
+                    Boolean checkUsernamePassword = DB.checkUsernamePassword(usernameLogin, passwordLogin);
 
-                if (password.length() < 8) {
-                    mPassword.setError("Password must be at least 8 characters.");
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-
-                // FIREBASE USER LOGIN
-
-                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(SignIn.this, "Logged in successfully.", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }
-                        else {
-                            Toast.makeText(SignIn.this, "Wrong !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    if (checkUsernamePassword) {
+                        Toast.makeText(SignIn.this, "Logged in successfully.", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    } else {
+                        Toast.makeText(SignIn.this, "Username or password is not correct.", Toast.LENGTH_LONG).show();
                     }
-                });
-            }
-        });
+                }
 
-        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SignUp.class));
             }
         });
 

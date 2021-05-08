@@ -1,92 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="30dp"
+    android:padding="10dp"
+    android:background="@drawable/login_background"
     tools:context=".SignIn">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/bjit"
+        android:src="@drawable/login"
         android:padding="20dp"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="@color/blue"
-        >
-
-        <EditText
-            android:id="@+id/Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:ems="10"
-            android:inputType="text"
-            android:textSize="@dimen/sp_20"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="@color/blue"
-        >
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textSize="@dimen/sp_20"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:scaleType="centerCrop"
         android:layout_marginTop="@dimen/dp_20"
-        android:textSize="@dimen/dp_20"
-        android:background="@drawable/rounded_button"
-        />
+        android:contentDescription="@string/todo" />
 
-    <TextView
+    <EditText
+        android:id="@+id/usernameLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dp_20"
-        android:text="You don't have an account?"
-        android:layout_marginTop="30dp"
-        />
+        android:hint="@string/username"
+        android:inputType="text"
+        android:textSize="25sp"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="50dp"
+        android:textColorHint="@color/white"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/passwordLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:layout_below="@+id/usernameLogin"
+        android:textColorHint="@color/white"
+        android:autofillHints="" />
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:textSize="@dimen/dp_20"
+        android:text="@string/sign_in"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="25sp"
         android:background="@drawable/rounded_button"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/passwordLogin"
+        android:textAllCaps="false"
         />
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        />
-
-</LinearLayout>
+</RelativeLayout>

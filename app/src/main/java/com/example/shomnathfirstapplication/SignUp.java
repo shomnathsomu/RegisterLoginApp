@@ -17,69 +17,55 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class SignUp extends AppCompatActivity {
-    EditText mFullName, mEmail, mPassword, mPhone;
+    EditText mUsername, mPassword, mConfirmPassword;
     Button mRegisterBtn, mLoginBtn;
-    FirebaseAuth fAuth;
-    ProgressBar progressBar;
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        getSupportActionBar().setTitle("Registration");
 
-        mFullName = findViewById(R.id.fullName);
-        mEmail = findViewById(R.id.Email);
-        mPassword = findViewById(R.id.password);
-        mPhone = findViewById(R.id.phone);
-        mRegisterBtn = findViewById(R.id.registerBtn);
-        mLoginBtn = findViewById(R.id.loginBtn);
-        fAuth = FirebaseAuth.getInstance();
-        progressBar = findViewById(R.id.progressBar);
+        mUsername = (EditText) findViewById(R.id.username);
+        mPassword = (EditText) findViewById(R.id.password);
+        mConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
-        if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
+        mRegisterBtn = (Button) findViewById(R.id.registerBtn);
+        mLoginBtn = (Button) findViewById(R.id.loginBtn);
+
+        DB = new DBHelper(this);
 
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                String username = mUsername.getText().toString();
+                String password = mPassword.getText().toString();
+                String confirmPassword = mConfirmPassword.getText().toString();
 
-                if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email is Required.");
-                    return;
-                }
+                if (username.equals("") || password.equals("") || confirmPassword.equals("")) {
+                    Toast.makeText(SignUp.this, "Fill all the fields.", Toast.LENGTH_SHORT).show();
+                } else {
 
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password id required.");
-                    return;
-                }
-
-                if (password.length() < 8) {
-                    mPassword.setError("Password must be at least 8 characters.");
-                    return;
-                }
-
-                progressBar.setVisibility(View.VISIBLE);
-
-                // FIREBASE USER REGISTRATION
-
-                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            Toast.makeText(SignUp.this, "User Created.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    if (password.equals(confirmPassword)) {
+                        Boolean checkUser = DB.checkUsername(username);
+                        if(!checkUser) {
+                            Boolean insert = DB.insertData(username, password);
+                            if (insert) {
+                                Toast.makeText(SignUp.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), SignIn.class));
+                            } else {
+                                Toast.makeText(SignUp.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SignUp.this, "User already exists! Please sign in", Toast.LENGTH_SHORT).show();
                         }
-                        else {
-                            Toast.makeText(SignUp.this, "Wrong !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    } else {
+                        Toast.makeText(SignUp.this, "Password is not matching", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
 
             }
         });

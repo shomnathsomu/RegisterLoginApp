@@ -3,4 +3,12 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email">E-mail</string>
+    <string name="sign_in">Sign In</string>
+    <string name="you_have_already_registered">You have already registered?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="todo">TODO</string>
+    <string name="you_don_t_have_an_account">You do not have an account?</string>
 </resources>

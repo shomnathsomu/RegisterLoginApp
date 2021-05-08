@@ -1,124 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical"
-    android:padding="30dp"
+    android:background="@drawable/register_background"
+    android:padding="10dp"
     tools:context=".SignUp">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/register_now"
+        android:scaleType="fitXY"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/todo" />
+
+    <EditText
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="@color/blue"
-        >
+        android:hint="@string/username"
+        android:inputType="text"
+        android:textSize="25sp"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/white"
+        android:autofillHints="" />
 
-        <EditText
-            android:id="@+id/fullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Full Name"
-            android:ems="10"
-            android:inputType="text"
-            android:textSize="@dimen/sp_20"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="@color/blue"
-        >
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:layout_below="@+id/username"
+        android:textColorHint="@color/white"
+        android:autofillHints="" />
 
-        <EditText
-            android:id="@+id/Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:ems="10"
-            android:inputType="text"
-            android:textSize="@dimen/sp_20"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
+        android:id="@+id/confirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="@color/blue"
-        >
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textSize="@dimen/sp_20"
-            
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:textColorHint="@color/blue"
-        >
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone"
-            android:ems="10"
-            android:inputType="text"
-            android:textSize="@dimen/sp_20"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:layout_below="@id/password"
+        android:textColorHint="@color/white"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:layout_marginTop="@dimen/dp_20"
-        android:textSize="@dimen/dp_20"
+        android:textSize="25sp"
         android:background="@drawable/rounded_button"
+        android:layout_below="@id/confirmPassword"
+        android:textAllCaps="false"
         />
 
     <TextView
+        android:id="@+id/signInText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dp_20"
-        android:text="You have already registered?"
+        android:textSize="20sp"
+        android:text="@string/you_have_already_registered"
         android:layout_marginTop="30dp"
+        android:layout_below="@id/registerBtn"
+        android:textColor="@color/white"
         />
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:textSize="@dimen/dp_20"
+        android:text="@string/sign_in"
+        android:textSize="25sp"
         android:background="@drawable/rounded_button"
         android:layout_marginTop="5dp"
+        android:layout_below="@id/signInText"
+        android:textAllCaps="false"
         />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
-</LinearLayout>
+</RelativeLayout>
